@@ -20,6 +20,20 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
 
+        viewModel.getErrorMsg().observe(this, errorMsg -> binding.tvError.setText(errorMsg));
+
         binding.btLogin.setOnClickListener(view -> viewModel.login(binding.etEmail.getText().toString(), binding.etPassword.getText().toString()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.registerListener();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.unregisterListener();
     }
 }
