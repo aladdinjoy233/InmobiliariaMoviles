@@ -26,18 +26,18 @@
     <fragment
         android:id="@+id/nav_inquilinos"
         android:name="com.example.inmobiliariamoviles.ui.inquilinos.InquilinosFragment"
-        android:label="fragment_inquilinos"
+        android:label="@string/menu_inquilinos"
         tools:layout="@layout/fragment_inquilinos" />
 
     <fragment
         android:id="@+id/nav_contratos"
         android:name="com.example.inmobiliariamoviles.ui.contratos.ContratosFragment"
-        android:label="fragment_contratos"
+        android:label="@string/menu_contratos"
         tools:layout="@layout/fragment_contratos" />
 
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.example.inmobiliariamoviles.ui.logout.LogoutFragment"
-        android:label="fragment_logout"
+        android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 </navigation>
