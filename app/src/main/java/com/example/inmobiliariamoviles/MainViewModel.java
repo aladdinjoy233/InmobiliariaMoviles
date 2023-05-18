@@ -1,16 +1,22 @@
 package com.example.inmobiliariamoviles;
 
+import android.Manifest;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,8 +29,11 @@ public class MainViewModel extends AndroidViewModel {
     private Context context;
     private ApiClient apiClient;
     private MutableLiveData<String> errorMsg;
+    private MutableLiveData<Boolean> permisoLlamada;
 
     private LeeSensor leeSensor;
+    protected static final int CALL_PERMISSION_REQUEST_CODE = 123;
+    private static final String NUMERO_INMOBILIARIA = "2664371603"; // Es mi numero jaja
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +50,14 @@ public class MainViewModel extends AndroidViewModel {
             errorMsg.setValue("");
         }
         return errorMsg;
+    }
+
+    public LiveData<Boolean> getPermisoLlamada() {
+        if (permisoLlamada == null) {
+            permisoLlamada = new MutableLiveData<>();
+            permisoLlamada.setValue(false);
+        }
+        return permisoLlamada;
     }
 
     public void login(String email, String password) {
@@ -81,6 +98,29 @@ public class MainViewModel extends AndroidViewModel {
         unregisterListener();
     }
 
+    public void verificarPermisosDeLlamada() {
+//        Ver si tiene permiso para llamar
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//            No dieron permiso, pedirlo
+            permisoLlamada.setValue(false);
+            return;
+        }
+
+//        Tiene permisos, realizar llamada
+        permisoLlamada.setValue(true);
+    }
+
+    private void llamar() {
+        if (Boolean.FALSE.equals(permisoLlamada.getValue())) {
+            verificarPermisosDeLlamada();
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + NUMERO_INMOBILIARIA));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     private class LeeSensor implements SensorEventListener {
 
         private SensorManager sensorManager;
@@ -118,7 +158,7 @@ public class MainViewModel extends AndroidViewModel {
             acceleration = acceleration * 0.9f + delta;
 
             if (acceleration > SHAKE_THRESHOLD) {
-                Toast.makeText(context, "Shake detected!", Toast.LENGTH_SHORT).show();
+                MainViewModel.this.llamar();
             }
 
         }
