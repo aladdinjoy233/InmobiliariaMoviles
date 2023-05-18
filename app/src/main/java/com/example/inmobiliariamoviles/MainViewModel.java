@@ -26,24 +26,31 @@ import com.example.inmobiliariamoviles.request.ApiClient;
 
 public class MainViewModel extends AndroidViewModel {
 
+//    Variables
     private Context context;
     private ApiClient apiClient;
     private MutableLiveData<String> errorMsg;
     private MutableLiveData<Boolean> permisoLlamada;
-
     private LeeSensor leeSensor;
     protected static final int CALL_PERMISSION_REQUEST_CODE = 123;
-    private static final String NUMERO_INMOBILIARIA = "2664371603"; // Es mi numero jaja
+    private static final String NUMERO_INMOBILIARIA = "2664371603"; // Es mi numero jaja (porfis no me llamen 🥺)
 
+//    Constructor
     public MainViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
         apiClient = ApiClient.getApi();
 
+//        Directamente verificamos si estan dados los permisos
+        permisoLlamada = new MutableLiveData<>();
+//        La funcion lo setea en el livedata
+        verificarPermisosDeLlamada();
+
         leeSensor = new LeeSensor(context);
         registerListener();
     }
 
+//    Getters
     public LiveData<String> getErrorMsg() {
         if (errorMsg == null) {
             errorMsg = new MutableLiveData<>();
@@ -53,13 +60,10 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Boolean> getPermisoLlamada() {
-        if (permisoLlamada == null) {
-            permisoLlamada = new MutableLiveData<>();
-            permisoLlamada.setValue(false);
-        }
         return permisoLlamada;
     }
 
+//    Logeo del usuario
     public void login(String email, String password) {
 //        Validar que venga vacio el email y password
         if (email.isEmpty() || password.isEmpty()) {
@@ -82,6 +86,7 @@ public class MainViewModel extends AndroidViewModel {
 //        TODO: Go to the main navigation activity using intents and all that
     }
 
+//    Funciones del sensor de movimiento
     public void registerListener() {
         if (leeSensor == null) return;
         leeSensor.registerListener();
@@ -98,29 +103,7 @@ public class MainViewModel extends AndroidViewModel {
         unregisterListener();
     }
 
-    public void verificarPermisosDeLlamada() {
-//        Ver si tiene permiso para llamar
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//            No dieron permiso, pedirlo
-            permisoLlamada.setValue(false);
-            return;
-        }
-
-//        Tiene permisos, realizar llamada
-        permisoLlamada.setValue(true);
-    }
-
-    private void llamar() {
-        if (Boolean.FALSE.equals(permisoLlamada.getValue())) {
-            verificarPermisosDeLlamada();
-            return;
-        }
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + NUMERO_INMOBILIARIA));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }
-
+//    Clase interna para el sensor de movimiento
     private class LeeSensor implements SensorEventListener {
 
         private SensorManager sensorManager;
@@ -164,8 +147,32 @@ public class MainViewModel extends AndroidViewModel {
         }
 
         @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+    }
 
+
+//    Funciones de llamada y permisos
+    public void verificarPermisosDeLlamada() {
+//        Ver si tiene permiso para llamar
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//            No dieron permiso, pedirlo
+            permisoLlamada.setValue(false);
+            return;
         }
+
+//        Tiene permisos, realizar llamada
+        permisoLlamada.setValue(true);
+    }
+
+    private void llamar() {
+//        Si es falso, no tiene permisos para llamar
+        if (Boolean.FALSE.equals(permisoLlamada.getValue())) {
+            verificarPermisosDeLlamada();
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + NUMERO_INMOBILIARIA));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

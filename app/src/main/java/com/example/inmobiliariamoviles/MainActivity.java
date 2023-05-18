@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.btLogin.setOnClickListener(view -> viewModel.login(binding.etEmail.getText().toString(), binding.etPassword.getText().toString()));
 
+//        Verificamos y pedimos los permisos si no estan dadas
         viewModel.getPermisoLlamada().observe(this, permisoLlamada -> {
             if (!permisoLlamada) {
                 pedirPermisos();
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    Metotods para registrar/deregistrar los sensores
     @Override
     protected void onResume() {
         super.onResume();
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.unregisterListener();
     }
 
+//    Funciones de permiso para la llamada de telefono
     private void pedirPermisos() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, MainViewModel.CALL_PERMISSION_REQUEST_CODE);
     }
