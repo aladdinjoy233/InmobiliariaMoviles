@@ -81,9 +81,11 @@ public class MainViewModel extends AndroidViewModel {
             return;
         }
 
-        Toast.makeText(context, "Login exitosa", Toast.LENGTH_SHORT).show();
         errorMsg.setValue("");
-//        TODO: Go to the main navigation activity using intents and all that
+
+        Intent intent = new Intent(context, NavigationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
     }
 
 //    Funciones del sensor de movimiento

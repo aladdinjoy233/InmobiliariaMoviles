@@ -97,4 +97,8 @@ public class Propietario {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public String obtenerNombreCompleto() {
+        return nombre + " " + apellido;
+    }
 }
