@@ -9,18 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.inmobiliariamoviles.databinding.FragmentInmueblesBinding;
 
 public class InmueblesFragment extends Fragment {
 
     private FragmentInmueblesBinding binding;
+    private InmueblesViewModel viewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        InmueblesViewModel viewModel = new ViewModelProvider(this).get(InmueblesViewModel.class);
+        viewModel = new ViewModelProvider(this).get(InmueblesViewModel.class);
 
         binding = FragmentInmueblesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        viewModel.getInmuebles().observe(getViewLifecycleOwner(), inmuebles -> {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+            binding.rvInmuebles.setLayoutManager(gridLayoutManager);
+            InmuebleAdapter adapter = new InmuebleAdapter(inmuebles, inflater);
+            binding.rvInmuebles.setAdapter(adapter);
+        });
 
         return root;
     }

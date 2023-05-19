@@ -23,6 +23,13 @@
         android:label="@string/menu_inmuebles"
         tools:layout="@layout/fragment_inmuebles" />
 
+
+    <fragment
+        android:id="@+id/detalle_inmueble_fragment"
+        android:name="com.example.inmobiliariamoviles.ui.inmuebles.DetalleInmuebleFragment"
+        android:label="@string/menu_inmuebles"
+        tools:layout="@layout/fragment_detalle_inmueble" />
+
     <fragment
         android:id="@+id/nav_inquilinos"
         android:name="com.example.inmobiliariamoviles.ui.inquilinos.InquilinosFragment"
