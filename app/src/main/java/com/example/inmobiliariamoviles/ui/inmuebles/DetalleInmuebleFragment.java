@@ -43,8 +43,11 @@ public class DetalleInmuebleFragment extends Fragment {
             binding.tvTipo.setText(inmueble.getTipo());
 
             binding.tvAmbientes.setText(String.valueOf(inmueble.getAmbientes()));
-            binding.tvPrecio.setText(String.valueOf(inmueble.getPrecio()));
             binding.cbDisponible.setChecked(inmueble.isEstado());
+        });
+
+        viewModel.getPrecioFormateada().observe(getViewLifecycleOwner(), precio -> {
+            binding.tvPrecio.setText(precio);
         });
 
         binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {

@@ -9,18 +9,21 @@ import androidx.lifecycle.ViewModel;
 import com.example.inmobiliariamoviles.models.Inmueble;
 import com.example.inmobiliariamoviles.request.ApiClient;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DetalleInmuebleViewModel extends ViewModel {
 
     private ApiClient apiClient;
     private MutableLiveData<Inmueble> inmueble = new MutableLiveData<>();
+    private MutableLiveData<String> precioFormateada = new MutableLiveData<>();
 
     public DetalleInmuebleViewModel() {
         apiClient = ApiClient.getApi();
     }
 
-    public LiveData<Inmueble> getInmueble() {
-        return inmueble;
-    }
+    public LiveData<Inmueble> getInmueble() { return inmueble; }
+    public LiveData<String> getPrecioFormateada() { return precioFormateada; }
 
     public void procesarDatos(Bundle bundle) {
         if (bundle == null) {
@@ -29,7 +32,12 @@ public class DetalleInmuebleViewModel extends ViewModel {
         }
 
         Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
-        if (inmueble != null) this.inmueble.setValue(inmueble);
+        if (inmueble != null) {
+            this.inmueble.setValue(inmueble);
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+            String formattedNumber = numberFormat.format(inmueble.getPrecio());
+            this.precioFormateada.setValue(formattedNumber);
+        }
     }
 
     public void setEstado(boolean estado) {
