@@ -17,6 +17,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobiliariamoviles.R;
 import com.example.inmobiliariamoviles.databinding.FragmentDetalleInmuebleBinding;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DetalleInmuebleFragment extends Fragment {
 
     private DetalleInmuebleViewModel viewModel;
@@ -42,12 +45,12 @@ public class DetalleInmuebleFragment extends Fragment {
             binding.tvUso.setText(inmueble.getUso());
             binding.tvTipo.setText(inmueble.getTipo());
 
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+            String formattedPrice = numberFormat.format(inmueble.getPrecio());
+            binding.tvPrecio.setText(formattedPrice);
+
             binding.tvAmbientes.setText(String.valueOf(inmueble.getAmbientes()));
             binding.cbDisponible.setChecked(inmueble.isEstado());
-        });
-
-        viewModel.getPrecioFormateada().observe(getViewLifecycleOwner(), precio -> {
-            binding.tvPrecio.setText(precio);
         });
 
         binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {

@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import com.example.inmobiliariamoviles.R;
 import com.example.inmobiliariamoviles.databinding.FragmentDetalleContratoBinding;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DetalleContratoFragment extends Fragment {
 
     private DetalleContratoViewModel viewModel;
@@ -28,6 +31,23 @@ public class DetalleContratoFragment extends Fragment {
         View root = binding.getRoot();
 
         viewModel.procesarDatos(getArguments());
+
+        viewModel.getContrato().observe(getViewLifecycleOwner(), contrato -> {
+            binding.tvCodigo.setText(String.valueOf(contrato.getIdContrato()));
+            binding.tvFechaInicio.setText(contrato.getFechaInicio());
+            binding.tvFechaFin.setText(contrato.getFechaFin());
+
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+            String formattedPrice = numberFormat.format(contrato.getMontoAlquiler());
+            binding.tvMonto.setText(formattedPrice);
+
+            binding.tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
+            binding.tvInmueble.setText("Inmueble en " + contrato.getInmueble().getDireccion());
+        });
+
+        binding.btPagos.setOnClickListener(v -> {
+            viewModel.verPagos(v);
+        });
 
         return root;
     }
