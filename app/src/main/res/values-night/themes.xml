@@ -2,15 +2,55 @@
     <!-- Base application theme. -->
     <style name="Theme.InmobiliariaMoviles" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorPrimary">@color/pearl</item>
+        <item name="colorPrimaryVariant">@color/blue_500</item>
+        <item name="colorOnPrimary">@color/gray</item>
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
+
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/gray</item>
+        <item name="android:navigationBarColor">@color/gray</item>
+        <item name="android:textColor">@color/pearl</item>
+
+        <item name="colorControlActivated">@color/pearl</item>
     </style>
+
+    <style name="Theme.InmobiliariaMoviles.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/pearl</item>
+    </style>
+
+    <style name="NavigationDrawerTheme" parent="ThemeOverlay.AppCompat">
+        <item name="android:background">@color/gray</item>
+        <item name="android:textColor">@color/pearl</item>
+        <item name="colorControlHighlight">@color/text</item>
+    </style>
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="android:layout_margin">10dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="contentPadding">10dp</item>
+        <item name="contentPaddingTop">15dp</item>
+        <item name="contentPaddingBottom">15dp</item>
+        <item name="cardBackgroundColor">@color/pearl</item>
+    </style>
+
+    <style name="CardTextViewStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="CardButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/gray</item>
+        <item name="backgroundTint">@color/gray</item>
+        <item name="android:textColor">@color/pearl</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@color/pearl</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColorPrimary">@color/gray</item>
+    </style>
+
 </resources>

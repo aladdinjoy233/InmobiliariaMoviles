@@ -36,7 +36,7 @@ public class LogoutFragment extends Fragment {
     }
 
     private void mostrarDialogoSalida(Context context) {
-        new AlertDialog.Builder(context)
+        new AlertDialog.Builder(context, R.style.CustomDialogTheme)
                 .setTitle("Cierre de sesion")
                 .setMessage("¿Esta seguro que desea cerrar la sesion?")
                 .setPositiveButton("Aceptar", (dialog, which) -> viewModel.logout())

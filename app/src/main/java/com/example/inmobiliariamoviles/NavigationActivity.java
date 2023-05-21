@@ -1,6 +1,7 @@
 package com.example.inmobiliariamoviles;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
