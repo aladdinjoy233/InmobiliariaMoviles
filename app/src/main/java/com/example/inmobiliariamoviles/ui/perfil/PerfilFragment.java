@@ -24,12 +24,11 @@ public class PerfilFragment extends Fragment {
         View root = binding.getRoot();
 
         viewModel.getPropietario().observe(getViewLifecycleOwner(), propietario -> {
-            binding.etId.setText(String.valueOf(propietario.getId()));
+            binding.etId.setText(String.valueOf(propietario.getId_Propietario()));
             binding.etDni.setText(String.valueOf(propietario.getDni()));
             binding.etNombre.setText(propietario.getNombre());
             binding.etApellido.setText(propietario.getApellido());
-            binding.etEmail.setText(propietario.getEmail());
-            binding.etPass.setText(propietario.getContraseña());
+            binding.etEmail.setText(propietario.getCorreo());
             binding.etTelefono.setText(propietario.getTelefono());
         });
 
@@ -38,7 +37,6 @@ public class PerfilFragment extends Fragment {
             binding.etNombre.setEnabled(isEdit);
             binding.etApellido.setEnabled(isEdit);
             binding.etEmail.setEnabled(isEdit);
-            binding.etPass.setEnabled(isEdit);
             binding.etTelefono.setEnabled(isEdit);
 
             binding.btEditar.setVisibility(isEdit ? View.GONE : View.VISIBLE);
@@ -51,12 +49,11 @@ public class PerfilFragment extends Fragment {
 
         binding.btGuardar.setOnClickListener(v -> {
             viewModel.guardarPerfil(
-                    Long.parseLong(binding.etDni.getText().toString()),
-                    binding.etNombre.getText().toString(),
-                    binding.etApellido.getText().toString(),
-                    binding.etEmail.getText().toString(),
-                    binding.etPass.getText().toString(),
-                    binding.etTelefono.getText().toString()
+                binding.etDni.getText().toString(),
+                binding.etNombre.getText().toString(),
+                binding.etApellido.getText().toString(),
+                binding.etEmail.getText().toString(),
+                binding.etTelefono.getText().toString()
             );
         });
 

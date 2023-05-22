@@ -36,9 +36,8 @@ public class NavigationActivity extends AppCompatActivity {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(NavigationViewModel.class);
 
         viewModel.getPropietario().observe(this, propietario -> {
-            ((ImageView) binding.navView.getHeaderView(0).findViewById(R.id.ivAvatarPropietario)).setImageResource(propietario.getAvatar());
             ((TextView) binding.navView.getHeaderView(0).findViewById(R.id.tvNombrePropietario)).setText(propietario.obtenerNombreCompleto());
-            ((TextView) binding.navView.getHeaderView(0).findViewById(R.id.tvEmailPropietario)).setText(propietario.getEmail());
+            ((TextView) binding.navView.getHeaderView(0).findViewById(R.id.tvEmailPropietario)).setText(propietario.getCorreo());
         });
 
         setSupportActionBar(binding.appBarNavigation.toolbar);

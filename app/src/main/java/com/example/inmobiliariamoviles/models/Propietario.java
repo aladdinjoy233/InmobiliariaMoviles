@@ -4,36 +4,33 @@ import java.util.Objects;
 
 public class Propietario {
 
-    private int id;
-    private Long dni;
-    private String nombre, apellido, email, contraseña, telefono;
-    private int avatar;
+    public int id_Propietario;
+    public String dni, nombre, apellido, correo, telefono;
 
     public Propietario(){}
-    public Propietario(int id, Long dni, String nombre, String apellido, String email, String contraseña, String telefono, int avatar) {
-        this.id = id;
+
+    public Propietario(int id, String dni, String nombre, String apellido, String correo, String telefono) {
+        this.id_Propietario = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
-        this.contraseña = contraseña;
+        this.correo = correo;
         this.telefono = telefono;
-        this.avatar = avatar;
     }
 
-    public int getId() {
-        return id;
+    public int getId_Propietario() {
+        return id_Propietario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Propietario(int id_Propietario) {
+        this.id_Propietario = id_Propietario;
     }
 
-    public Long getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Long dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -53,20 +50,12 @@ public class Propietario {
         this.apellido = apellido;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTelefono() {
@@ -77,25 +66,17 @@ public class Propietario {
         this.telefono = telefono;
     }
 
-    public int getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(int avatar) {
-        this.avatar = avatar;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Propietario that = (Propietario) o;
-        return id == that.id;
+        return id_Propietario == that.id_Propietario;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id_Propietario);
     }
 
     public String obtenerNombreCompleto() {

@@ -40,22 +40,27 @@ public class DetalleInmuebleFragment extends Fragment {
                     .load(inmueble.getImagen())
                     .into(binding.ivFotoInmueble);
 
-            binding.tvCodigo.setText(String.valueOf(inmueble.getIdInmueble()));
+            binding.tvCodigo.setText(String.valueOf(inmueble.getId_Inmueble()));
             binding.tvDireccion.setText(inmueble.getDireccion());
-            binding.tvUso.setText(inmueble.getUso());
-            binding.tvTipo.setText(inmueble.getTipo());
+            binding.tvUso.setText(inmueble.getUsoNombre());
+            binding.tvTipo.setText(inmueble.getTipoNombre());
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
             String formattedPrice = numberFormat.format(inmueble.getPrecio());
             binding.tvPrecio.setText(formattedPrice);
 
             binding.tvAmbientes.setText(String.valueOf(inmueble.getAmbientes()));
-            binding.cbDisponible.setChecked(inmueble.isEstado());
         });
 
-        binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            viewModel.setEstado(isChecked);
+        viewModel.getEstadoInmueble().observe(getViewLifecycleOwner(), isActive -> {
+            binding.cbDisponible.setOnCheckedChangeListener(null); // Desactivarlo temporalmente
+            binding.cbDisponible.setChecked(isActive);
+            binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                viewModel.setEstado(isChecked);
+            });
         });
+
+
 
         return root;
     }

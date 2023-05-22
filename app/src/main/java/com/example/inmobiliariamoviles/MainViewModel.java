@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -22,7 +23,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.inmobiliariamoviles.models.Propietario;
+import com.example.inmobiliariamoviles.models.Usuario;
 import com.example.inmobiliariamoviles.request.ApiClient;
+import com.example.inmobiliariamoviles.request.ApiClientRetrofit;
+import com.example.inmobiliariamoviles.request.EndpointInmobiliaria;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -39,7 +47,7 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
-        apiClient = ApiClient.getApi();
+//        apiClient = ApiClient.getApi();
 
 //        Directamente verificamos si estan dados los permisos
         permisoLlamada = new MutableLiveData<>();
@@ -72,20 +80,39 @@ public class MainViewModel extends AndroidViewModel {
             return;
         }
 
-        Propietario propietario = apiClient.login(email, password);
+        Usuario user = new Usuario(email, password);
+        EndpointInmobiliaria endpoint = ApiClientRetrofit.getEndpoint();
+        Call<String> call = endpoint.login(user);
 
-//        Si no existe el usuario, algun dato esta incorrecto
-        if (propietario == null) {
-            Toast.makeText(context, "Datos incorrectos", Toast.LENGTH_SHORT).show();
-            errorMsg.setValue("Datos incorrectos");
-            return;
-        }
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
-        errorMsg.setValue("");
+                if (response.isSuccessful()) {
 
-        Intent intent = new Intent(context, NavigationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+                    if (response.body() != null) {
+                        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("token", "Bearer " + response.body());
+                        editor.commit();
+
+                        Intent intent = new Intent(context, NavigationActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
+                    }
+                } else {
+                    if (response.code() == 404) {
+                        Toast.makeText(context, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                Toast.makeText(context, "Error al llamar login", Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", t.getMessage());
+            }
+        });
     }
 
 //    Funciones del sensor de movimiento
