@@ -44,6 +44,8 @@ public class DetalleInmuebleFragment extends Fragment {
             binding.tvDireccion.setText(inmueble.getDireccion());
             binding.tvUso.setText(inmueble.getUsoNombre());
             binding.tvTipo.setText(inmueble.getTipoNombre());
+            binding.tvLatitud.setText(String.valueOf(inmueble.getLatitud()));
+            binding.tvLongitud.setText(String.valueOf(inmueble.getLongitud()));
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
             String formattedPrice = numberFormat.format(inmueble.getPrecio());
