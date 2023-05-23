@@ -42,7 +42,6 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
         String formattedNumber = numberFormat.format(inmueble.getPrecio());
 
-//        holder.binding.ivFotoInmueble.setImageResource(inmuebles.getImagen());
         holder.binding.tvDireccionInmueble.setText(inmueble.getDireccion());
         holder.binding.tvPrecioInmueble.setText(formattedNumber);
 
