@@ -33,12 +33,12 @@ public class DetalleContratoFragment extends Fragment {
         viewModel.procesarDatos(getArguments());
 
         viewModel.getContrato().observe(getViewLifecycleOwner(), contrato -> {
-            binding.tvCodigo.setText(String.valueOf(contrato.getIdContrato()));
-            binding.tvFechaInicio.setText(contrato.getFechaInicio());
-            binding.tvFechaFin.setText(contrato.getFechaFin());
+            binding.tvCodigo.setText(String.valueOf(contrato.getId_Contrato()));
+            binding.tvFechaInicio.setText(contrato.getFecha_Inicio().toString());
+            binding.tvFechaFin.setText(contrato.getFecha_Fin().toString());
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
-            String formattedPrice = numberFormat.format(contrato.getMontoAlquiler());
+            String formattedPrice = numberFormat.format(contrato.getMonto_Mensual());
             binding.tvMonto.setText(formattedPrice);
 
             binding.tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());

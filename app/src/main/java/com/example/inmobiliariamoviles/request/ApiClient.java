@@ -130,14 +130,14 @@ public class ApiClient {
         //Propietarios
 //        Propietario juan = new Propietario(1,23492012L,"Juan","Perez","juan@mail.com","123","2664553447", R.drawable.juan);
 //        Propietario sonia = new Propietario(2,17495869L,"Sonia","Lucero","sonia@mail.com","123","266485417",R.drawable.sonia);
-        Propietario juan = new Propietario(1,"23492012L","Juan","Perez","juan@mail.com","2664553447");
-        Propietario sonia = new Propietario(2,"17495869L","Sonia","Lucero","sonia@mail.com","266485417");
-        propietarios.add(juan);
-        propietarios.add(sonia);
+//        Propietario juan = new Propietario(1,"23492012L","Juan","Perez","juan@mail.com","2664553447");
+//        Propietario sonia = new Propietario(2,"17495869L","Sonia","Lucero","sonia@mail.com","266485417");
+//        propietarios.add(juan);
+//        propietarios.add(sonia);
 
         //Inquilinos
-        Inquilino mario = new Inquilino(100,25340691L,"Mario","Luna","Aiello sup.","luna@mail.com","2664253411","Lucero Roberto","2664851422");
-        inquilinos.add(mario);
+//        Inquilino mario = new Inquilino(100,25340691L,"Mario","Luna","Aiello sup.","luna@mail.com","2664253411","Lucero Roberto","2664851422");
+//        inquilinos.add(mario);
 
         //Inmuebles
 //        Inmueble salon = new Inmueble(501,"Colon 340","comercial","salon",2,20000,juan,true,"http://www.secsanluis.com.ar/servicios/salon1.jpg");

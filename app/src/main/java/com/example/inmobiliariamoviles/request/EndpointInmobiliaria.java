@@ -1,6 +1,7 @@
 package com.example.inmobiliariamoviles.request;
 
 import com.example.inmobiliariamoviles.models.Inmueble;
+import com.example.inmobiliariamoviles.models.Inquilino;
 import com.example.inmobiliariamoviles.models.Propietario;
 import com.example.inmobiliariamoviles.models.Usuario;
 
@@ -31,9 +32,11 @@ public interface EndpointInmobiliaria {
     @PUT("inmuebles/cambiar_estado/{id}")
     Call<Inmueble> cambiarEstado(@Header("Authorization") String token, @Path("id") int id, @Body boolean estado);
 
-//
-//        //        @GET("Inmuebles/{id}") para mandarle un id como parametro (@Path("id") int id)
-//        @GET("Inmuebles/0") // Harcodeado 0 por ahora
-//        Call<List<Inmueble>> obtenerInmuebles(@Header("Authorization") String token);
+    @POST("inmuebles/alquilados")
+    Call<List<Inmueble>> obtenerInmueblesAlquiladas(@Header("Authorization") String token);
+
+    @POST("Inquilinos/Obtener/{id}")
+    Call<Inquilino> obtenerPorInmueble(@Header("Authorization") String token, @Path("id") int id);
+
 
 }

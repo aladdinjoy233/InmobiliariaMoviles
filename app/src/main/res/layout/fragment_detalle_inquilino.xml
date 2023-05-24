@@ -172,54 +172,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLabelTelefono" />
 
-        <TextView
-            android:id="@+id/tvLabelGarante"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Garante:"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTelefono" />
-
-        <TextView
-            android:id="@+id/tvGarante"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Garante"
-            android:textAlignment="textStart"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelGarante" />
-
-        <TextView
-            android:id="@+id/tvLabelTelefonoGarante"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Telefono Garante:"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGarante" />
-
-        <TextView
-            android:id="@+id/tvTelefonoGarante"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tel Garante"
-            android:textAlignment="textStart"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelTelefonoGarante" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

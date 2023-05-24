@@ -40,7 +40,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
 
         holder.binding.tvCodigoPago.setText(String.valueOf(pago.getIdPago()));
         holder.binding.tvNumeroPago.setText(String.valueOf(pago.getNumero()));
-        holder.binding.tvCodigoContrato.setText(String.valueOf(pago.getContrato().getIdContrato()));
+        holder.binding.tvCodigoContrato.setText(String.valueOf(pago.getContrato().getId_Contrato()));
 
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
         String formattedPrice = numberFormat.format(pago.getImporte());

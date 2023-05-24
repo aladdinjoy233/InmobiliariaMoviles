@@ -1,65 +1,54 @@
 package com.example.inmobiliariamoviles.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Contrato implements Serializable {
 
-    private int idContrato;
-    private String fechaInicio, fechaFin;
-    private double montoAlquiler;
-    private Inquilino inquilino;
+    private int id_Contrato, id_Inmueble, id_Inqulino;
     private Inmueble inmueble;
+    private Inquilino inquilino;
+    private LocalDateTime fecha_Inicio, fecha_Fin;
+    private double monto_Mensual;
+    private boolean activo;
 
     public Contrato() {}
-    public Contrato(int idContrato, String fechaInicio, String fechaFin, double montoAlquiler, Inquilino inquilino, Inmueble inmueble) {
-        this.idContrato = idContrato;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.montoAlquiler = montoAlquiler;
-        this.inquilino = inquilino;
+
+    public Contrato(int id_Contrato, int id_Inmueble, int id_Inqulino, Inmueble inmueble, Inquilino inquilino, LocalDateTime fecha_Inicio, LocalDateTime fecha_Fin, double monto_Mensual, boolean activo) {
+        this.id_Contrato = id_Contrato;
+        this.id_Inmueble = id_Inmueble;
+        this.id_Inqulino = id_Inqulino;
         this.inmueble = inmueble;
-    }
-
-    public int getIdContrato() {
-        return idContrato;
-    }
-
-    public void setIdContrato(int idContrato) {
-        this.idContrato = idContrato;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public double getMontoAlquiler() {
-        return montoAlquiler;
-    }
-
-    public void setMontoAlquiler(double montoAlquiler) {
-        this.montoAlquiler = montoAlquiler;
-    }
-
-
-    public Inquilino getInquilino() {
-        return inquilino;
-    }
-
-    public void setInquilino(Inquilino inquilino) {
         this.inquilino = inquilino;
+        this.fecha_Inicio = fecha_Inicio;
+        this.fecha_Fin = fecha_Fin;
+        this.monto_Mensual = monto_Mensual;
+        this.activo = activo;
+    }
+
+    public int getId_Contrato() {
+        return id_Contrato;
+    }
+
+    public void setId_Contrato(int id_Contrato) {
+        this.id_Contrato = id_Contrato;
+    }
+
+    public int getId_Inmueble() {
+        return id_Inmueble;
+    }
+
+    public void setId_Inmueble(int id_Inmueble) {
+        this.id_Inmueble = id_Inmueble;
+    }
+
+    public int getId_Inqulino() {
+        return id_Inqulino;
+    }
+
+    public void setId_Inqulino(int id_Inqulino) {
+        this.id_Inqulino = id_Inqulino;
     }
 
     public Inmueble getInmueble() {
@@ -70,16 +59,56 @@ public class Contrato implements Serializable {
         this.inmueble = inmueble;
     }
 
+    public Inquilino getInquilino() {
+        return inquilino;
+    }
+
+    public void setInquilino(Inquilino inquilino) {
+        this.inquilino = inquilino;
+    }
+
+    public LocalDateTime getFecha_Inicio() {
+        return fecha_Inicio;
+    }
+
+    public void setFecha_Inicio(LocalDateTime fecha_Inicio) {
+        this.fecha_Inicio = fecha_Inicio;
+    }
+
+    public LocalDateTime getFecha_Fin() {
+        return fecha_Fin;
+    }
+
+    public void setFecha_Fin(LocalDateTime fecha_Fin) {
+        this.fecha_Fin = fecha_Fin;
+    }
+
+    public double getMonto_Mensual() {
+        return monto_Mensual;
+    }
+
+    public void setMonto_Mensual(double monto_Mensual) {
+        this.monto_Mensual = monto_Mensual;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contrato contrato = (Contrato) o;
-        return idContrato == contrato.idContrato;
+        return id_Contrato == contrato.id_Contrato;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idContrato);
+        return Objects.hash(id_Contrato);
     }
 }

@@ -138,4 +138,22 @@ public class Inmueble implements Serializable {
     public int hashCode() {
         return Objects.hash(id_Inmueble);
     }
+
+    @Override
+    public String toString() {
+        return "Inmueble{" +
+                "id_Inmueble=" + id_Inmueble +
+                ", id_Propietario=" + id_Propietario +
+                ", ambientes=" + ambientes +
+                ", propietario=" + propietario +
+                ", direccion='" + direccion + '\'' +
+                ", usoNombre='" + usoNombre + '\'' +
+                ", tipoNombre='" + tipoNombre + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", precio=" + precio +
+                ", activo=" + activo +
+                '}';
+    }
 }

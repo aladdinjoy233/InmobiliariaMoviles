@@ -29,14 +29,12 @@ public class DetalleInquilinoFragment extends Fragment {
         viewModel.procesarDatos(getArguments());
 
         viewModel.getInquilino().observe(getViewLifecycleOwner(), inquilino -> {
-           binding.tvCodigo.setText(String.valueOf(inquilino.getIdInquilino()));
+           binding.tvCodigo.setText(String.valueOf(inquilino.getId_Inquilino()));
            binding.tvNombre.setText(inquilino.getNombre());
            binding.tvApellido.setText(inquilino.getApellido());
-           binding.tvDni.setText(String.valueOf(inquilino.getDNI()));
-           binding.tvEmail.setText(inquilino.getEmail());
+           binding.tvDni.setText(String.valueOf(inquilino.getDni()));
+           binding.tvEmail.setText(inquilino.getCorreo());
            binding.tvTelefono.setText(inquilino.getTelefono());
-           binding.tvGarante.setText(inquilino.getNombreGarante());
-           binding.tvTelefonoGarante.setText(inquilino.getTelefonoGarante());
         });
 
         return root;
