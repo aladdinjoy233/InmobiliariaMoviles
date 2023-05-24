@@ -16,6 +16,9 @@ import com.example.inmobiliariamoviles.R;
 import com.example.inmobiliariamoviles.databinding.FragmentDetalleContratoBinding;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class DetalleContratoFragment extends Fragment {
@@ -34,8 +37,20 @@ public class DetalleContratoFragment extends Fragment {
 
         viewModel.getContrato().observe(getViewLifecycleOwner(), contrato -> {
             binding.tvCodigo.setText(String.valueOf(contrato.getId_Contrato()));
-            binding.tvFechaInicio.setText(contrato.getFecha_Inicio().toString());
-            binding.tvFechaFin.setText(contrato.getFecha_Fin().toString());
+
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            try {
+                Date fechaInicio = inputFormat.parse(contrato.getFecha_Inicio());
+                Date fechaFin = inputFormat.parse(contrato.getFecha_Fin());
+
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                binding.tvFechaInicio.setText(outputFormat.format(fechaInicio));
+                binding.tvFechaFin.setText(outputFormat.format(fechaFin));
+            } catch (ParseException e) {
+                binding.tvFechaInicio.setText(contrato.getFecha_Inicio());
+                binding.tvFechaFin.setText(contrato.getFecha_Fin());
+            }
+
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
             String formattedPrice = numberFormat.format(contrato.getMonto_Mensual());

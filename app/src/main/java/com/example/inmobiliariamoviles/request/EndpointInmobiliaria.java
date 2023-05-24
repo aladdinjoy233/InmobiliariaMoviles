@@ -1,5 +1,6 @@
 package com.example.inmobiliariamoviles.request;
 
+import com.example.inmobiliariamoviles.models.Contrato;
 import com.example.inmobiliariamoviles.models.Inmueble;
 import com.example.inmobiliariamoviles.models.Inquilino;
 import com.example.inmobiliariamoviles.models.Propietario;
@@ -36,7 +37,10 @@ public interface EndpointInmobiliaria {
     Call<List<Inmueble>> obtenerInmueblesAlquiladas(@Header("Authorization") String token);
 
     @POST("Inquilinos/Obtener/{id}")
-    Call<Inquilino> obtenerPorInmueble(@Header("Authorization") String token, @Path("id") int id);
+    Call<Inquilino> obtenerInquilinoPorInmueble(@Header("Authorization") String token, @Path("id") int id);
+
+    @POST("Contratos/Obtener/{id}")
+    Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int id);
 
 
 }

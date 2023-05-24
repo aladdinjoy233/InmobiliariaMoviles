@@ -46,7 +46,7 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.ViewHo
     }
 
     @Override
-    public int getItemCount() { return inmuebles.size(); };
+    public int getItemCount() { return inmuebles.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardContratoBinding binding;

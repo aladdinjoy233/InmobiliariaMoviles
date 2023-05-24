@@ -46,7 +46,6 @@ public class DetalleInquilinoViewModel extends AndroidViewModel {
         }
 
         Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
-        Log.d("Salida: ", "Inmueble: " + inmueble.toString());
         if (inmueble == null) return;
 
         SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
@@ -60,7 +59,7 @@ public class DetalleInquilinoViewModel extends AndroidViewModel {
         }
 
         EndpointInmobiliaria endpoint = ApiClientRetrofit.getEndpoint();
-        Call<Inquilino> call = endpoint.obtenerPorInmueble(token, inmueble.getId_Inmueble());
+        Call<Inquilino> call = endpoint.obtenerInquilinoPorInmueble(token, inmueble.getId_Inmueble());
 
         call.enqueue(new Callback<Inquilino>() {
             @Override
@@ -74,7 +73,7 @@ public class DetalleInquilinoViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<Inquilino> call, @NonNull Throwable t) {
-                Toast.makeText(context, "Error al inquilino", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error al obtener inquilino", Toast.LENGTH_SHORT).show();
             }
         });
     }

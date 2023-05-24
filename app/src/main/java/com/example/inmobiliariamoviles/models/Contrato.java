@@ -9,13 +9,13 @@ public class Contrato implements Serializable {
     private int id_Contrato, id_Inmueble, id_Inqulino;
     private Inmueble inmueble;
     private Inquilino inquilino;
-    private LocalDateTime fecha_Inicio, fecha_Fin;
+    private String fecha_Inicio, fecha_Fin;
     private double monto_Mensual;
     private boolean activo;
 
     public Contrato() {}
 
-    public Contrato(int id_Contrato, int id_Inmueble, int id_Inqulino, Inmueble inmueble, Inquilino inquilino, LocalDateTime fecha_Inicio, LocalDateTime fecha_Fin, double monto_Mensual, boolean activo) {
+    public Contrato(int id_Contrato, int id_Inmueble, int id_Inqulino, Inmueble inmueble, Inquilino inquilino, String fecha_Inicio, String fecha_Fin, double monto_Mensual, boolean activo) {
         this.id_Contrato = id_Contrato;
         this.id_Inmueble = id_Inmueble;
         this.id_Inqulino = id_Inqulino;
@@ -67,19 +67,19 @@ public class Contrato implements Serializable {
         this.inquilino = inquilino;
     }
 
-    public LocalDateTime getFecha_Inicio() {
+    public String getFecha_Inicio() {
         return fecha_Inicio;
     }
 
-    public void setFecha_Inicio(LocalDateTime fecha_Inicio) {
+    public void setFecha_Inicio(String fecha_Inicio) {
         this.fecha_Inicio = fecha_Inicio;
     }
 
-    public LocalDateTime getFecha_Fin() {
+    public String getFecha_Fin() {
         return fecha_Fin;
     }
 
-    public void setFecha_Fin(LocalDateTime fecha_Fin) {
+    public void setFecha_Fin(String fecha_Fin) {
         this.fecha_Fin = fecha_Fin;
     }
 
@@ -110,5 +110,18 @@ public class Contrato implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id_Contrato);
+    }
+
+    @Override
+    public String toString() {
+        return "Contrato{" +
+                "id_Contrato=" + id_Contrato +
+                ", id_Inmueble=" + id_Inmueble +
+                ", id_Inqulino=" + id_Inqulino +
+                ", fecha_Inicio=" + fecha_Inicio +
+                ", fecha_Fin=" + fecha_Fin +
+                ", monto_Mensual=" + monto_Mensual +
+                ", activo=" + activo +
+                '}';
     }
 }
