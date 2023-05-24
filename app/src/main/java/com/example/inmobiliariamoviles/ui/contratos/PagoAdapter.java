@@ -14,7 +14,10 @@ import com.example.inmobiliariamoviles.models.Inmueble;
 import com.example.inmobiliariamoviles.models.Pago;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
@@ -38,7 +41,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Pago pago = pagos.get(position);
 
-        holder.binding.tvCodigoPago.setText(String.valueOf(pago.getIdPago()));
+        holder.binding.tvCodigoPago.setText(String.valueOf(pago.getId_Pago()));
         holder.binding.tvNumeroPago.setText(String.valueOf(pago.getNumero()));
         holder.binding.tvCodigoContrato.setText(String.valueOf(pago.getContrato().getId_Contrato()));
 
@@ -46,7 +49,16 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
         String formattedPrice = numberFormat.format(pago.getImporte());
         holder.binding.tvImporte.setText(formattedPrice);
 
-        holder.binding.tvFecha.setText(pago.getFechaDePago());
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            Date fecha = inputFormat.parse(pago.getFecha());
+
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            holder.binding.tvFecha.setText(outputFormat.format(fecha));
+        } catch (ParseException e) {
+            holder.binding.tvFecha.setText(pago.getFecha());
+        }
+
     }
 
     @Override

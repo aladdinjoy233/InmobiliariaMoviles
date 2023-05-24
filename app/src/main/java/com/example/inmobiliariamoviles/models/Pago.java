@@ -4,27 +4,36 @@ import java.io.Serializable;
 
 public class Pago implements Serializable {
 
-    private int idPago, numero;
+    private int id_Pago, id_Contrato, numero;
     private Contrato contrato;
+    private String fecha;
     private double importe;
-    private String fechaDePago;
 
     public Pago() {}
 
-    public Pago(int idPago, int numero, Contrato contrato, double importe, String fechaDePago) {
-        this.idPago = idPago;
-        this.numero = numero;
+    public Pago(int id_Pago, int id_Contrato, int numero, Contrato contrato, String fecha, double importe) {
+        this.id_Pago = id_Pago;
+        this.id_Contrato = id_Contrato;
         this.contrato = contrato;
+        this.numero = numero;
+        this.fecha = fecha;
         this.importe = importe;
-        this.fechaDePago = fechaDePago;
     }
 
-    public int getIdPago() {
-        return idPago;
+    public int getId_Pago() {
+        return id_Pago;
     }
 
-    public void setIdPago(int idPago) {
-        this.idPago = idPago;
+    public void setId_Pago(int id_Pago) {
+        this.id_Pago = id_Pago;
+    }
+
+    public int getId_Contrato() {
+        return id_Contrato;
+    }
+
+    public void setId_Contrato(int id_Contrato) {
+        this.id_Contrato = id_Contrato;
     }
 
     public int getNumero() {
@@ -43,19 +52,19 @@ public class Pago implements Serializable {
         this.contrato = contrato;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     public double getImporte() {
         return importe;
     }
 
     public void setImporte(double importe) {
         this.importe = importe;
-    }
-
-    public String getFechaDePago() {
-        return fechaDePago;
-    }
-
-    public void setFechaDePago(String fechaDePago) {
-        this.fechaDePago = fechaDePago;
     }
 }
