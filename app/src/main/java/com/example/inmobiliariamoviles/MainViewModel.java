@@ -115,6 +115,34 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
+//    Funcion para verificar la sesion
+    public void verificarSesion() {
+        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+        String token = sp.getString("token", "");
+
+        if (token.isEmpty()) { // Si no trae token, volver al login
+            return;
+        }
+
+        EndpointInmobiliaria endpoint = ApiClientRetrofit.getEndpoint();
+        Call<Propietario> call = endpoint.obtenerPerfil(token);
+
+        call.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(@NonNull Call<Propietario> call, @NonNull Response<Propietario> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Intent intent = new Intent(context, NavigationActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Propietario> call, @NonNull Throwable t) {
+            }
+        });
+    }
+
 //    Funciones del sensor de movimiento
     public void registerListener() {
         if (leeSensor == null) return;
