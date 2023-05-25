@@ -28,22 +28,22 @@ public interface EndpointInmobiliaria {
     @POST("propietarios/edit")
     Call<Propietario> editarPerfil(@Header("Authorization") String token, @Body Propietario propietario);
 
-    @POST("inmuebles/")
+    @GET("inmuebles/")
     Call<List<Inmueble>> obtenerInmuebles(@Header("Authorization") String token);
 
     @PUT("inmuebles/cambiar_estado/{id}")
     Call<Inmueble> cambiarEstado(@Header("Authorization") String token, @Path("id") int id, @Body boolean estado);
 
-    @POST("inmuebles/alquilados")
+    @GET("inmuebles/alquilados")
     Call<List<Inmueble>> obtenerInmueblesAlquiladas(@Header("Authorization") String token);
 
-    @POST("Inquilinos/Obtener/{id}")
+    @GET("Inquilinos/Obtener/{id}")
     Call<Inquilino> obtenerInquilinoPorInmueble(@Header("Authorization") String token, @Path("id") int id);
 
-    @POST("Contratos/Obtener/{id}")
+    @GET("Contratos/Obtener/{id}")
     Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int id);
 
-    @POST("Pagos/Obtener/{id}")
+    @GET("Pagos/Obtener/{id}")
     Call<List<Pago>> obtenerPagosPorContrato(@Header("Authorization") String token, @Path("id") int id);
 
 
